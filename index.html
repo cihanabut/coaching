@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CoachMinute - Coaching personnalisé par IA</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container header-content">
+        <div class="logo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#10b981"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"
+            ></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="22"></line>
+          </svg>
+          <span>CoachMinute</span>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">À propos</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>CoachMinute</h1>
+        <p class="subtitle">
+          Obtenez un coaching personnalisé généré par IA en quelques secondes
+        </p>
+        <p class="description">
+          Dites-nous ce que vous recherchez, et notre IA créera un coaching
+          audio adapté à vos besoins.
+        </p>
+      </section>
+
+      <section class="coaching-form-container">
+        <div class="card">
+          <form id="coachingForm">
+            <div class="form-group">
+              <label for="topic">Sujet du coaching</label>
+              <input
+                type="text"
+                id="topic"
+                placeholder="Ex: motivation, productivité, confiance en soi..."
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="language">Langue</label>
+              <select id="language">
+                <option value="français">Français</option>
+                <option value="english">Anglais</option>
+                <option value="español">Espagnol</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="additionalInfo"
+                >Informations supplémentaires (optionnel)</label
+              >
+              <textarea
+                id="additionalInfo"
+                placeholder="Précisez votre demande, votre situation ou vos objectifs..."
+              ></textarea>
+            </div>
+
+            <button type="submit" id="generateButton" class="button">
+              Générer mon coaching
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section id="resultSection" class="result-section hidden">
+        <div class="card">
+          <h2>Votre coaching personnalisé</h2>
+          <div id="coachingResult" class="coaching-result"></div>
+
+          <div class="action-buttons">
+            <button id="generateAudioButton" class="button button-outline">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+              </svg>
+              Générer l'audio
+            </button>
+
+            <button id="sendEmailButton" class="button button-outline">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m22 2-7 20-4-9-9-4Z"></path>
+                <path d="M22 2 11 13"></path>
+              </svg>
+              Envoyer par email
+            </button>
+          </div>
+
+          <div id="audioPlayer" class="audio-player hidden">
+            <h3>Version audio</h3>
+            <audio controls id="audioElement" class="audio-element">
+              Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>
+          © <span id="currentYear"></span> CoachMinute. Tous droits réservés.
+        </p>
+      </div>
+    </footer>
+
+    <div id="toast" class="toast hidden">
+      <div class="toast-content">
+        <p id="toastMessage"></p>
+      </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay hidden">
+      <div class="spinner"></div>
+      <p>Génération en cours...</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
