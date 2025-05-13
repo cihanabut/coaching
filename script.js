@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const coachingForm = document.getElementById("coachingForm");
   const topicInput = document.getElementById("topic");
   const languageSelect = document.getElementById("language");
@@ -15,11 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const loadingOverlay = document.getElementById("loadingOverlay");
   const currentYearElement = document.getElementById("currentYear");
 
+  // S'assure que le loadingOverlay est bien caché au chargement de la page
+  loadingOverlay.classList.add("hidden");
+
   // Affiche l'année actuelle
   currentYearElement.textContent = new Date().getFullYear();
 
   // Formulaire
-  coachingForm.addEventListener("submit", async function (e) {
+  coachingForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const topic = topicInput.value.trim();
@@ -27,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const additionalInfo = additionalInfoTextarea.value.trim();
 
     if (!topic) {
-      showToast("Veuillez entrer un sujet de coaching");
+      showToast("Veuillez entrer un sujet pour votre pause tranquillité");
       return;
     }
 
@@ -43,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     resultSection.classList.remove("hidden");
     resultSection.scrollIntoView({ behavior: "smooth" });
 
-    showToast("Coaching généré avec succès");
+    showToast("Votre pause tranquillité a été générée avec succès");
     showLoading(false);
   });
 
@@ -81,10 +84,14 @@ document.addEventListener("DOMContentLoaded", function () {
       "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";
 
     const messages = [
-      { role: "system", content: "Tu es un coach bienveillant et inspirant." },
+      {
+        role: "system",
+        content:
+          "Tu es un coach spécialisé en santé mentale, bienveillant et apaisant. Tu donnes des conseils pour aider à gérer le stress et retrouver la paix intérieure.",
+      },
       {
         role: "user",
-        content: `Donne-moi une minute de coaching en ${language} sur le sujet suivant : "${topic}". Infos supplémentaires : ${additionalInfo}`,
+        content: `Donne-moi une minute de conseils en ${language} sur le sujet suivant lié à la santé mentale : "${topic}". Infos supplémentaires : ${additionalInfo}`,
       },
     ];
 
@@ -97,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Content-Type": "application/json",
             Authorization: `Bearer ${apiKey}`,
             "HTTP-Referer": "http://localhost",
-            "X-Title": "CoachingAI",
+            "X-Title": "La minute tranquillité",
           },
           body: JSON.stringify({
             model: "mistralai/mistral-7b-instruct",
@@ -110,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         console.error("Erreur API OpenRouter :", errorData);
+        showLoading(false); // Assurez-vous que le spinner est masqué en cas d'erreur
         return "Une erreur est survenue. Veuillez réessayer.";
       }
 
@@ -117,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return data.choices[0].message.content;
     } catch (error) {
       console.error("Erreur JS :", error);
+      showLoading(false); // Assurez-vous que le spinner est masqué en cas d'erreur
       return "Une erreur est survenue. Veuillez réessayer.";
     }
   }
