@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // API OpenRouter
   async function fetchCoachingResponse(topic, language, additionalInfo) {
     const apiKey =
-      "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";
+      "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";
 
     const messages = [
       {
