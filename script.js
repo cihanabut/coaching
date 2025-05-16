@@ -90,9 +90,10 @@ document.addEventListener("DOMContentLoaded", () => {
           "Tu es un coach spécialisé en santé mentale, bienveillant et apaisant. Tu donnes des conseils pour aider à gérer le stress et retrouver la paix intérieure.",
       },
       {
-        role: "user",
-        content: `Donne-moi une minute de conseils en ${language} sur le sujet suivant lié à la santé mentale : "${topic}". Infos supplémentaires : ${additionalInfo}`,
-      },
+  role: "user",
+  content: `Donne-moi une minute de conseils en ${language} sur le sujet suivant lié à la santé mentale : "${topic}". Infos supplémentaires : ${additionalInfo}`,
+},
+
     ];
 
     try {
